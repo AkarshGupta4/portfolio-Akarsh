@@ -34,12 +34,14 @@ const ContactForm = () => {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
+    if (!isTyping) setIsTyping(true);
   };
 
   // legacy local submit removed; using web3forms onSubmit above
@@ -49,7 +51,7 @@ const ContactForm = () => {
 
   return (
     <section id="contact" className="relative min-h-screen w-full bg-gradient-to-b from-black to-[#9a74cf50] flex items-center justify-center px-6 md:px-12 lg:px-20 py-16 overflow-hidden">
-      {stars.map((_, i) => (
+      {!isTyping && stars.map((_, i) => (
         <span
           key={i}
           className="absolute bg-white rounded-full opacity-80"
@@ -88,6 +90,8 @@ const ContactForm = () => {
               name="name"
               value={formData.name}
               onChange={handleChange}
+              onFocus={() => setIsTyping(true)}
+              onBlur={() => setIsTyping(false)}
               className="w-full p-3 rounded-lg bg-transparent text-white placeholder-gray-400 border border-gray-700/60 focus:border-purple-500 focus:ring-2 focus:ring-purple-500 focus:outline-none"
               placeholder="Enter your name"
             />
@@ -100,6 +104,8 @@ const ContactForm = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
+              onFocus={() => setIsTyping(true)}
+              onBlur={() => setIsTyping(false)}
               className="w-full p-3 rounded-lg bg-transparent text-white placeholder-gray-400 border border-gray-700/60 focus:border-purple-500 focus:ring-2 focus:ring-purple-500 focus:outline-none"
               placeholder="Enter your email"
             />
@@ -112,6 +118,8 @@ const ContactForm = () => {
               rows="5"
               value={formData.message}
               onChange={handleChange}
+              onFocus={() => setIsTyping(true)}
+              onBlur={() => setIsTyping(false)}
               className="w-full p-3 rounded-lg bg-transparent text-white placeholder-gray-400 border border-gray-700/60 focus:border-purple-500 focus:ring-2 focus:ring-purple-500 focus:outline-none"
               placeholder="Write your message..."
             />

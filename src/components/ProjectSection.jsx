@@ -112,35 +112,7 @@ const ProjectSection = () => {
     enableHorizontal();
     window.addEventListener("resize", handleResize);
 
-    // Sequential pop-out with bounce for all cards
-    cardRefs.current.forEach((card, idx) => {
-      gsap.fromTo(
-        card,
-        {
-          scale: 0,
-          opacity: 0,
-          skewX: 10,
-          skewY: 10,
-          boxShadow: "0px 0px 0px rgba(0,0,0,0)",
-          transformOrigin: "top left",
-        },
-        {
-          scale: 1,
-          opacity: 1,
-          skewX: 0,
-          skewY: 0,
-          boxShadow: "10px 10px 40px rgba(0,0,0,0.5)",
-          duration: 0.8,
-          ease: "back.out(1.7)", // bounce effect
-          scrollTrigger: {
-            trigger: card,
-            start: "top 90%",
-            toggleActions: "play none none reverse",
-          },
-          delay: idx * 0.2, // sequential delay
-        }
-      );
-    });
+    // Removed per-card bounce animations for simplicity/perf
 
     return () => {
       disableHorizontal();
@@ -248,8 +220,6 @@ const ProjectSection = () => {
               <div
                 ref={(el) => (cardRefs.current[idx] = el)}
                 className="w-full max-w-md sm:max-w-xl md:max-w-4xl aspect-video relative group"
-                onMouseMove={(e) => handleMouseMove(e, e.currentTarget)}
-                onMouseLeave={(e) => handleMouseLeave(e.currentTarget)}
               >
                 {/* Glow */}
                 <div className="absolute -inset-2 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl opacity-0 group-hover:opacity-40 blur-0 md:blur-xl transition-all duration-500 group-hover:duration-200"></div>
