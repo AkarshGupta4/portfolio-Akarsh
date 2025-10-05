@@ -1,12 +1,43 @@
-# React + Vite
+# 🌐 Portfolio — Akarsh Gupta
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> A modern, responsive, and elegant personal portfolio built with **React + Vite + Tailwind CSS**.  
+> Designed to showcase projects, skills, and contact information beautifully.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Live Demo
 
-## Expanding the ESLint configuration
+👉 **[Visit My Portfolio](https://portfolio-akarshgupta.vercel.app)**  
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Take a look at the live version deployed on **Vercel**.
+
+---
+
+## 🔧 Project Overview
+
+This portfolio website is built using **React** (with **Vite**) for fast performance and **Tailwind CSS** for sleek, responsive design.  
+It highlights your personal details, skills, and projects while maintaining a clean, modern layout that’s easy to navigate.
+
+---
+
+## 🧰 Tech Stack
+
+- ⚛️ **React** – Frontend library  
+- ⚡ **Vite** – Next-gen frontend tooling  
+- 🎨 **Tailwind CSS** – Utility-first CSS framework  
+- 🧱 **PostCSS** & **ESLint** – Styling and code linting  
+
+---
+
+## 🧩 Features
+
+- ⚡ Lightning-fast development with Vite HMR  
+- 📱 Fully responsive across devices  
+- 🎨 Tailwind-based modern UI design  
+- 🧭 Clean structure for scalability  
+- ☁️ Easy deployment via Vercel  
+
+---
+
+## 🗂 Folder Structure
+
