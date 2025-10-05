@@ -84,7 +84,7 @@ const ProjectSection = () => {
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top top",
-            end: "+=3000",
+            end: () => (window.innerWidth < 1024 ? "+=1500" : "+=2500"),
             scrub: 1,
             pin: true,
             anticipatePin: 1,
@@ -148,19 +148,18 @@ const ProjectSection = () => {
     };
   }, []);
 
-  // Hover tilt with dynamic shadow
-  const handleMouseMove = (e, cardElement) => {
-    if (!cardElement) return;
+  // Hover tilt with dynamic shadow (throttled with rAF)
+  let isRafScheduled = false;
+  let lastEvent = null;
+  const animateTilt = (cardElement) => {
+    if (!cardElement || !lastEvent) return;
     const rect = cardElement.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
+    const x = lastEvent.clientX - rect.left;
+    const y = lastEvent.clientY - rect.top;
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
-
     const rotateX = (y - centerY) / 25;
     const rotateY = (centerX - x) / 25;
-
     gsap.to(cardElement, {
       rotationX: rotateX,
       rotationY: rotateY,
@@ -169,6 +168,16 @@ const ProjectSection = () => {
       duration: 0.2,
       ease: "power1.out",
     });
+    isRafScheduled = false;
+  };
+
+  const handleMouseMove = (e, cardElement) => {
+    if (!cardElement || window.innerWidth < 768) return; // disable on mobile
+    lastEvent = e;
+    if (!isRafScheduled) {
+      isRafScheduled = true;
+      requestAnimationFrame(() => animateTilt(cardElement));
+    }
   };
 
   const handleMouseLeave = (cardElement) => {
@@ -182,8 +191,9 @@ const ProjectSection = () => {
     });
   };
 
-  // Floating stars
-  const stars = Array.from({ length: 60 });
+  // Floating stars (reduced for performance, fewer on mobile)
+  const starCount = typeof window !== "undefined" && window.innerWidth < 768 ? 15 : 30;
+  const stars = Array.from({ length: starCount });
 
   return (
     <section
@@ -211,7 +221,7 @@ const ProjectSection = () => {
       ))}
 
       {/* Heading */}
-      <div className="sticky top-0 z-20 bg-black/50 backdrop-blur-sm py-6 md:py-10">
+      <div className="sticky top-0 z-20 bg-black/50 backdrop-blur-0 md:backdrop-blur-sm py-6 md:py-10">
         <h2
           ref={titleRef}
           className="text-3xl md:text-5xl lg:text-6xl font-bold text-white text-center mb-4"
@@ -242,11 +252,13 @@ const ProjectSection = () => {
                 onMouseLeave={(e) => handleMouseLeave(e.currentTarget)}
               >
                 {/* Glow */}
-                <div className="absolute -inset-2 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl opacity-0 group-hover:opacity-40 blur-xl transition-all duration-500 group-hover:duration-200"></div>
+                <div className="absolute -inset-2 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl opacity-0 group-hover:opacity-40 blur-0 md:blur-xl transition-all duration-500 group-hover:duration-200"></div>
 
                 {/* Card */}
                 <div className="relative bg-gray-900 rounded-2xl overflow-hidden">
                   <img
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover rounded-2xl"
                     src={project.imageSrc}
                     alt={project.title}
