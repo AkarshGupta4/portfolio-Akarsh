@@ -15,24 +15,32 @@ const ProjectSection = () => {
       id: 1,
       title: "VetLink",
       imageSrc: "/image/VetLink.png",
+      width: 1280,
+      height: 720,
       githubLink: "https://github.com/AkarshGupta4/VetLink",
     },
     {
       id: 2,
       title: "Portfolio Website",
       imageSrc: "/image/VetLink.png",
+      width: 1280,
+      height: 720,
       githubLink: "https://github.com/AkarshGupta4/portfolio",
     },
     {
       id: 3,
       title: "BMI App",
       imageSrc: "/image/VetLink.png",
+      width: 1280,
+      height: 720,
       githubLink: "https://github.com/AkarshGupta4/BMI-App",
     },
     {
       id: 4,
       title: "Weather App",
       imageSrc: "/image/VetLink.png",
+      width: 1280,
+      height: 720,
       githubLink: "https://github.com/AkarshGupta4/weather-app",
     },
   ];
@@ -84,11 +92,12 @@ const ProjectSection = () => {
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top top",
-            end: () => (window.innerWidth < 1024 ? "+=1500" : "+=2500"),
+            end: () => (window.innerWidth < 1024 ? "+=900" : "+=2200"),
             scrub: 1,
             pin: true,
             anticipatePin: 1,
             invalidateOnRefresh: true,
+            fastScrollEnd: true,
           },
         });
       }
@@ -164,7 +173,7 @@ const ProjectSection = () => {
   };
 
   // Floating stars (reduced for performance, fewer on mobile)
-  const starCount = typeof window !== "undefined" && window.innerWidth < 768 ? 15 : 30;
+  const starCount = typeof window !== "undefined" && window.innerWidth < 768 ? 6 : 24;
   const stars = Array.from({ length: starCount });
 
   return (
@@ -229,9 +238,14 @@ const ProjectSection = () => {
                   <img
                     loading="lazy"
                     decoding="async"
+                    fetchpriority="low"
                     className="w-full h-full object-cover rounded-2xl"
                     src={project.imageSrc}
                     alt={project.title}
+                    width={project.width}
+                    height={project.height}
+                    srcSet={`${project.imageSrc} 1x`}
+                    sizes="(max-width: 768px) 100vw, 80vw"
                   />
                   <div className="flex items-center gap-3 md:gap-4 mt-3 md:mt-6 justify-center relative z-10 pb-4">
                     <h2 className="text-xl md:text-3xl font-bold text-white group-hover:text-purple-400 transition-colors duration-300">

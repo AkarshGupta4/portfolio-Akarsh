@@ -48,7 +48,7 @@ const AboutSection = () => {
   }, []);
 
   // Create 50 stars
-  const stars = Array.from({ length: 50 });
+  const stars = Array.from({ length: typeof window !== 'undefined' && window.innerWidth < 768 ? 12 : 36 });
 
   return (
     <section
@@ -79,6 +79,10 @@ const AboutSection = () => {
               src={profileImg}
               alt="Akarsh Profile"
               loading="lazy"
+              decoding="async"
+              fetchpriority="low"
+              width={512}
+              height={512}
               className="w-full max-w-xs sm:max-w-sm md:max-w-sm lg:max-w-md h-auto object-contain object-center shadow-xl"
             />
           </a>

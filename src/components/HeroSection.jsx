@@ -63,8 +63,8 @@ const HeroSection = () => {
       </div>
 
       {/* Right 3D Model */}
-      <div className="order-1 md:order-2 relative w-full md:w-1/2 h-[380px] sm:h-[450px] md:h-[600px] lg:h-[700px] flex justify-center md:justify-end mt-6 md:mt-0">
-        <Spline scene="https://prod.spline.design/L84S1rtpUzKctYy6/scene.splinecode" style={{ width: '100%', height: '100%' }} />
+      <div className="order-1 md:order-2 relative w-full md:w-1/2 h-[280px] sm:h-[360px] md:h-[600px] lg:h-[700px] flex justify-center md:justify-end mt-6 md:mt-0">
+        <Spline scene="https://prod.spline.design/L84S1rtpUzKctYy6/scene.splinecode" style={{ width: '100%', height: '100%', willChange: 'transform' }} />
       </div>
     </section>
   );
